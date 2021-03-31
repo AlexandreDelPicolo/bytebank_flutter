@@ -1,38 +1,55 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(
-      MaterialApp(
-        home: Scaffold(
-          appBar: AppBar(
-            title: Text('Transferências'),
-            actions: [],
-          ),
-          floatingActionButton: FloatingActionButton(
-            child: Icon(Icons.add),
-            onPressed: () {},
-          ),
-          body: ListaTransferencias(),
-        ),
-      ),
-    );
+void main() => runApp(BytebankApp());
 
-class ListaTransferencias extends StatelessWidget {
+class BytebankApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ItemTrasnferencia(Transferencia(100.0, 88457)),
-        ItemTrasnferencia(Transferencia(200.0, 88457)),
-        ItemTrasnferencia(Transferencia(300.0, 88457))
-      ],
+    return MaterialApp(
+      home: Scaffold(
+        body: FormularioTransferencias(),
+      ),
     );
   }
 }
 
-class ItemTrasnferencia extends StatelessWidget {
+class FormularioTransferencias extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Criando Transferencia')),
+      body: Text('Teste'),
+    );
+  }
+}
+
+class ListaTransferencias extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Transferências'),
+        actions: [],
+      ),
+      body: Column(
+        children: [
+          ItemTransferencia(Transferencia(100.0, 88457)),
+          ItemTransferencia(Transferencia(200.0, 88457)),
+          ItemTransferencia(Transferencia(300.0, 88457))
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {},
+      ),
+    );
+  }
+}
+
+class ItemTransferencia extends StatelessWidget {
   final Transferencia _transferencia;
 
-  ItemTrasnferencia(this._transferencia);
+  ItemTransferencia(this._transferencia);
 
   @override
   Widget build(BuildContext context) {
