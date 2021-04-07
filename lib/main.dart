@@ -89,6 +89,7 @@ class Editor extends StatelessWidget {
 }
 
 class ListaTransferencias extends StatelessWidget {
+  final List<Transferencia> transferencias = <Transferencia>[];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -96,12 +97,11 @@ class ListaTransferencias extends StatelessWidget {
         title: Text('Transferências'),
         actions: [],
       ),
-      body: Column(
-        children: [
-          ItemTransferencia(Transferencia(100.0, 88457)),
-          ItemTransferencia(Transferencia(200.0, 88457)),
-          ItemTransferencia(Transferencia(300.0, 88457))
-        ],
+      body: ListView.builder(
+        itemCount: transferencias.length,
+        itemBuilder: (context, index) {
+          return ItemTransferencia(transferencias[index]);
+        },
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
@@ -113,6 +113,7 @@ class ListaTransferencias extends StatelessWidget {
             }),
           );
           future.then((transferenciaRecebida) {
+            transferencias.add(transferenciaRecebida);
             print('$transferenciaRecebida');
           });
         },
