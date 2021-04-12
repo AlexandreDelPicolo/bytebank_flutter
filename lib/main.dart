@@ -23,27 +23,29 @@ class FormularioTransferencias extends StatelessWidget {
       appBar: AppBar(title: Text('Criando Transferencia')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Editor(
-              controlador: _controladorNumeroConta,
-              rotulo: 'Número da conta',
-              dica: '0000',
-            ),
-            Editor(
-              controlador: _controladorValor,
-              rotulo: 'Valor',
-              dica: '00.0',
-              icone: Icons.monetization_on,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0),
-              child: RaisedButton(
-                child: Text('Confirmar'),
-                onPressed: () => _criarTransferencia(context),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Editor(
+                controlador: _controladorNumeroConta,
+                rotulo: 'Número da conta',
+                dica: '0000',
               ),
-            ),
-          ],
+              Editor(
+                controlador: _controladorValor,
+                rotulo: 'Valor',
+                dica: '00.0',
+                icone: Icons.monetization_on,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 16.0),
+                child: RaisedButton(
+                  child: Text('Confirmar'),
+                  onPressed: () => _criarTransferencia(context),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -120,6 +122,8 @@ class ListaTransferenciasState extends State<ListaTransferencias> {
           future.then((transferenciaRecebida) {
             debugPrint('chegou no then do future');
             debugPrint('$transferenciaRecebida');
+
+            if (transferenciaRecebida == null) return;
 
             setState(() {
               widget.transferencias.add(transferenciaRecebida);
